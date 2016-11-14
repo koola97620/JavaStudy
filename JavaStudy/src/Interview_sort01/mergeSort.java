@@ -29,6 +29,8 @@ public class mergeSort {
 		return merge(mergesort(leftHalf), mergesort(rightHalf));
 		
 	}
+	
+	
 	private static List<Integer> merge(final List<Integer> left, final List<Integer> right) {
 		int leftPtr =0;
 		int rightPtr =0;
