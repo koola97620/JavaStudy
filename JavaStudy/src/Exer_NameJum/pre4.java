@@ -18,11 +18,11 @@ public class pre4 {
 			}
 		
 		//배열을 출력하는 함수
-		public static void print(int[] arr, int k) {
+		public static void print(int[] arr, int k, int depth) {
 			StringBuilder sbb = new StringBuilder();
 			for (int i = 0; i < k; i++) {
 				if(i == k - 1) { 
-					 System.out.println(arr[i] + "   i " + i + "  k = " + k); //한 줄에서 마지막단계
+					 System.out.println(arr[i] + "   i " + i + "  k = " + k + " depth = " +depth); //한 줄에서 마지막단계
 					 sbb.append(arr[i]);
 				}else {
 					System.out.print(arr[i] + ",");
@@ -42,7 +42,7 @@ public class pre4 {
 			 */
 			
 			if(depth == k){ //한 번 depth가 k로 도달하면 사이클이 돌았음
-				print(arr, k);
+				print(arr, k, depth);
 				return;
 			}
 			
