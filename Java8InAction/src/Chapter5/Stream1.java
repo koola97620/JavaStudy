@@ -1,5 +1,7 @@
 package Chapter5;
 
+import Chapter5.Dish.Type;
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +58,23 @@ public class Stream1 {
      */
     List<Integer> numbers = Arrays.asList(1,2,1,3,3,2,4);
     //numbers.add(5); UnsupportedOperationException 발생.
-    System.out.println(numbers);
+    System.out.println("numbers  : "+numbers);
+
+    numbers.stream()
+        .filter( (Integer i) -> i % 2 ==0)
+        .distinct()
+//        .forEach( (Integer i) -> System.out.println(i));
+        .forEach(System.out::println);
+
+    List<Dish> dishes = Dish.menu.stream()
+        .filter((Dish d) -> (d.getType() == Type.MEAT))
+        .limit(2)
+        .collect(Collectors.toList());
+
+
+    List<Dish> dishes2 = Dish.menu.stream()
+        .filter(d -> d.getName().length() > 5)
+        .collect(Collectors.toList());
 
 
 
@@ -65,5 +83,6 @@ public class Stream1 {
 
 
   }
+
 
 }
