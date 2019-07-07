@@ -11,39 +11,33 @@ import java.util.List;
  */
 public class Theater {
   final private List<TicketOffice> ticketOffices = new ArrayList<>();
-  final private Long fee;
+  private String name;
 
-  public Theater(Long fee) {
-    this.fee = fee;
-  }
-
-  Long getFee() {
-    return this.fee;
+  public Theater(String name) {
+    this.name = name;
   }
 
   public void setTicketOffices(TicketOffice ... ticketOffices) {
     this.ticketOffices.addAll(Arrays.asList(ticketOffices));
   }
 
-  public void setTicket(TicketOffice ticketOffice, Long num) {
+  public void setTicket(TicketOffice ticketOffice, Long num, Movie movie, Long fee) {
     if(!ticketOffices.contains(ticketOffice)) {
       return;
     }
-
-    // 티켓오피스에 티켓을 세팅하는데. 티켓이 5만개면 . 반복문이 5만번 돌아가야하는건가 ㄷㄷ
-    // num 이 갯수를 뜻하는게 맞긴 한가?
+    // 티켓오피스에 티켓을 세팅하는데. 티켓이 5만개면 . 반복문이 5만번...
     while(num-- > 0) {
-      ticketOffice.addTicket(new Ticket(this));
+      ticketOffice.addTicket(new Ticket(this , movie , fee));
     }
   }
 
-  public void setInvitation(Audience audience) {
-    audience.setInvitation(new Invitation(this));
+  public void setInvitation(Audience audience, Movie movie) {
+    audience.setInvitation(new Invitation(this, movie));
   }
 
-  public boolean enter(Audience audience) {
+  public boolean enter(Audience audience , Movie movie) {
     Ticket ticket = audience.getTicket();
-    return ticket.isValid(this);
+    return ticket.isValid(this, movie);
   }
 
 }

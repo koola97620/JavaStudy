@@ -6,10 +6,16 @@ package Misson.Week01;
  * @description
  */
 public class Invitation {
-  public final static Invitation EMPTY = new Invitation(null);
+  public final static Invitation EMPTY = new Invitation(null, null);
   private final Theater theater;
+  private final Movie movie;
 
-  public Invitation(Theater theater) {
+  public Invitation(Theater theater, Movie movie) {
     this.theater = theater;
+    this.movie = movie;
+  }
+
+  public Movie getMovie() {
+    return this.movie;
   }
 }

@@ -1,7 +1,9 @@
 package Misson.Week01;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author choijaeyong on 06/07/2019.
@@ -10,33 +12,43 @@ import java.util.List;
  */
 public class TicketOffice {
   private Long amount;
-  private List<Ticket> tickets = new ArrayList<>();
+  //private List<Ticket> tickets = new ArrayList<>();
+  private Map<Movie , List<Ticket>> movieListMap = new HashMap<>();
+  private final Theater theater;
 
-  public TicketOffice(Long amount) {
+  public TicketOffice(Long amount, Theater theater) {
     this.amount = amount;
+    this.theater = theater;
   }
 
   public void addTicket(Ticket ticket) {
-    this.tickets.add(ticket);
+    Movie movie = ticket.getMovie();
+    if(movieListMap.containsKey(movie)) {
+      movieListMap.get(movie).add(ticket);
+    } else {
+      List<Ticket> ticketList = new ArrayList<>();
+      ticketList.add(ticket);
+      movieListMap.put(movie, ticketList);
+    }
   }
 
-  public Long getTicketPrice() {
-    if(tickets.size() == 0 ) return 0L;
-    else return tickets.get(0).getFee();
+  public Long getTicketPrice(Movie movie) {
+    if(movieListMap.size() == 0 ) return 0L;
+    else return movieListMap.get(movie).get(0).getFee();
   }
 
-  public Ticket getTicketWithFee() {
-    if(tickets.size() == 0) return Ticket.EMPTY;
+  public Ticket getTicketWithFee(Movie movie) {
+    if(movieListMap.size() == 0) return Ticket.EMPTY;
     else {
-      Ticket ticket = tickets.remove(0);
+      Ticket ticket = movieListMap.get(movie).remove(0);
       amount += ticket.getFee();
       return ticket;
     }
   }
 
-  public Ticket getTicketWithNoFee() {
-    if(tickets.size() == 0) return Ticket.EMPTY;
-    else return tickets.remove(0);
+  public Ticket getTicketWithNoFee(Movie movie) {
+    if(movieListMap.size() == 0) return Ticket.EMPTY;
+    else return movieListMap.get(movie).remove(0);
   }
 
 }

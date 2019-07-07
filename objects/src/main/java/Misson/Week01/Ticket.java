@@ -7,24 +7,32 @@ package Misson.Week01;
  */
 public class Ticket {
 
-  public static final Ticket EMPTY = new Ticket(null);
+  public static final Ticket EMPTY = new Ticket(null,null, null);
   private final Theater theater;
+  private final Movie movie;
+  private Long fee;
   private boolean isEntered = false;
 
-  public Ticket(Theater theater) {
+  public Ticket(Theater theater , Movie movie , Long fee) {
     this.theater = theater;
+    this.movie = movie;
+    this.fee = fee;
   }
 
-  public boolean isValid(Theater theater) {
-    if(isEntered || theater != this.theater || this == EMPTY) {
+  public boolean isValid(Theater theater,Movie movie) {
+    if(this.isEntered || this.theater != theater|| this.movie != movie || this == EMPTY) {
       return false;
     } else {
-      isEntered = true;
+      this.isEntered = true;
       return true;
     }
   }
 
   public Long getFee() {
-    return theater.getFee();
+    return this.fee;
+  }
+
+  public Movie getMovie() {
+    return this.movie;
   }
 }

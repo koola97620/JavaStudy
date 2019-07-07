@@ -9,41 +9,40 @@ public class Audience {
 
 
   private Long amount;
-  private Ticket ticket = new Ticket(null);
+  private Ticket ticket = Ticket.EMPTY;
+  private Invitation invitation = Invitation.EMPTY;
 
   public Audience(Long amount) {
     this.amount = amount;
   }
 
-  public void buyTicket(TicketSeller ticketSeller) {
-    ticket = ticketSeller.getTicket(this);
+  public void buyTicket(TicketSeller ticketSeller , Movie movie) {
+    this.ticket = ticketSeller.getTicket(this , movie);
   }
 
   public void setInvitation(Invitation invitation) {
-
-
+    this.invitation = invitation;
   }
 
   public Ticket getTicket() {
-
-    return null;
+    return this.ticket;
   }
 
   public Invitation getInvitation() {
-
+    return this.invitation;
   }
 
   public void removeInvitation() {
-
+    invitation = Invitation.EMPTY;
   }
 
-  public boolean hasAmount(Long price) {
-
-
+  public boolean hasAmount(Long amount) {
+    return this.amount >= amount;
   }
 
-  public void minusAmount(Long price) {
-
-
+  public boolean minusAmount(Long amount) {
+    if(amount > this.amount) return false;
+    this.amount -= amount;
+    return true;
   }
 }
