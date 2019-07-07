@@ -16,7 +16,8 @@ package Misson.Week01;
  * - 하나의 영화가 여러개의 가격을 가질 수 있는 건가.?
  * - 과제에서 극장의 수는 하나로 고정인건가? 아닌듯.
  *   티켓의 isValid 메서드를 보면 극장이 여러개 일 수도 있다고 가정하는 코드가 보인다.
- * -
+ *
+ * 일단 1,2 번의 문제만 해결하는 코드만 만들어보자.
  */
 public class Main {
   public static void main(String[] args) {
