@@ -1,100 +1,68 @@
 package Chapter05;
 
-
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author choijaeyong on 08/07/2019.
- * @project objects
- * @description
- */
-public class Movie {
-  private String title;
-  private Duration runningTime;
-  private Money fee;
-  private List<DiscountCondition> discountConditions;
+public abstract class Movie {
+    private String title;
+    private Duration runningTime;
+    private Money fee;
+    private List<DiscountCondition> discountConditions;
 
-  private MovieType movieType;
-  private Money discountAmount;
-  private double discountPercent;
-
-  public Money getFee() {
-    return fee;
-  }
-
-  public void setFee(Money fee) {
-    this.fee = fee;
-  }
-
-  public List<DiscountCondition> getDiscountConditions() {
-    return Collections.unmodifiableList(discountConditions);
-  }
-
-  public void setDiscountConditions(List<DiscountCondition> discountConditions) {
-    this.discountConditions = discountConditions;
-  }
-
-  public MovieType getMovieType() {
-    return movieType;
-  }
-
-  public Money calculateAmountDiscountedFee() {
-    if(movieType != MovieType.AMOUNT_DISCOUNT) {
-      throw new IllegalArgumentException();
+    public Movie(String title, Duration runningTime, Money fee, DiscountCondition... discountConditions) {
+        this.title = title;
+        this.runningTime = runningTime;
+        this.fee = fee;
+        this.discountConditions = Arrays.asList(discountConditions);
     }
-    return fee.minus(discountAmount);
-  }
 
-  public Money calculatePercentDiscountedFee() {
-    if(movieType != MovieType.PERCENT_DISCOUNT) {
-      throw new IllegalArgumentException();
-    }
-    return fee.minus(fee.times(discountPercent));
-  }
 
-  public Money calculateNoneDiscountedFee() {
-    if(movieType != MovieType.NONE_DISCOUNT) {
-      throw new IllegalArgumentException();
-    }
-    return fee;
-  }
 
-  public boolean isDiscountable(LocalDateTime whenScreened , int sequence) {
-    for(DiscountCondition condition : discountConditions ) {
-      if(condition.getType() == DiscountConditionType.PERIOD) {
-        if(condition.isDiscountable(whenScreened.getDayOfWeek() , whenScreened.toLocalTime())) {
-          return true;
+    private MovieType movieType;
+    private Money discountAmount;
+    private double discountPercent;
+
+    public Money calculateMovieFee(Screening screening) {
+        if(isDiscountable(screening)) {
+            return fee.minus(calculateDiscountAmount());
         }
-      }else {
-        if(condition.isDiscountable(sequence)) {
-          return true;
-        }
-      }
+        return fee;
     }
-    return false;
-  }
 
 
-  public void setMovieType(MovieType movieType) {
-    this.movieType = movieType;
-  }
+    private boolean isDiscountable(Screening screening) {
+        return discountConditions.stream()
+                .anyMatch(condition -> condition.isSatisfiedBy(screening));
+    }
 
-  public Money getDiscountAmount() {
-    return discountAmount;
-  }
+    abstract protected Money calculateDiscountAmount();
 
-  public void setDiscountAmount(Money discountAmount) {
-    this.discountAmount = discountAmount;
-  }
+//    private Money calculateDiscountAmount() {
+//        switch (movieType) {
+//            case AMOUNT_DISCOUNT:
+//                return calculateAmountDiscountAmount();
+//            case PERCENT_DISCOUNT:
+//                return calculatePercentDiscountAmount();
+//            case NONE_DISCOUNT:
+//                return calculateNoneDiscountAmount();
+//        }
+//        throw new IllegalArgumentException();
+//    }
 
-  public double getDiscountPercent() {
-    return discountPercent;
-  }
+    private Money calculateAmountDiscountAmount() {
+        return discountAmount;
+    }
+    private Money calculatePercentDiscountAmount() {
+        return fee.times(discountPercent);
+    }
 
-  public void setDiscountPercent(double discountPercent) {
-    this.discountPercent = discountPercent;
-  }
+    private Money calculateNoneDiscountAmount() {
+        return Money.ZERO;
+    }
+
+    protected Money getFee() {
+        return fee;
+    }
+
 }
