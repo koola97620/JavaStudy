@@ -24,7 +24,8 @@ public class Phone {
 
   private double taxRate;
 
-  public Phone(PhoneType type, Money amount, Money nightlyAmount,Money regularAmount, Duration seconds) {
+  public Phone(PhoneType regular, Money money, Money zero, Money amount,
+      Duration seconds) {
     this.amount = amount;
     this.regularAmount = regularAmount;
     this.nightlyAmount = nightlyAmount;
