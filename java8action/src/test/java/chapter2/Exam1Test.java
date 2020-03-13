@@ -1,11 +1,11 @@
 package chapter2;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+
 
 /**
  * @author choijaeyong on 2020/03/12.
@@ -28,6 +28,16 @@ public class Exam1Test {
     List<Apple> result = new ArrayList<Apple>();
     for (Apple apple : inventory) {
       if ("green".equals(apple.getColor())) {
+        result.add(apple);
+      }
+    }
+    return result;
+  }
+
+  public List<Apple> filterApplesByColor(List<Apple> inventory, String color) {
+    List<Apple> result = new ArrayList<Apple>();
+    for (Apple apple : inventory) {
+      if (apple.getColor().equals(color)) {
         result.add(apple);
       }
     }
