@@ -4,6 +4,7 @@ package chapter2;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -14,13 +15,27 @@ import org.junit.jupiter.api.Test;
  */
 public class Exam1Test {
 
-  @Test
-  public void filterTest1() {
-    List<Apple> inventory = Arrays.asList(
+  private List<Apple> inventory;
+
+  @BeforeEach
+  public void setUp() {
+    inventory = Arrays.asList(
         new Apple("red") ,
         new Apple("green") ,
         new Apple("yellow"));
+  }
+
+  @Test
+  public void filterTest1() {
     filterGreenApples(inventory);
+
+  }
+
+  @Test
+  public void filterTest2() {
+    List<Apple> greenApples = filterApplesByColor(inventory, "green");
+    List<Apple> redApples = filterApplesByColor(inventory, "red");
+
 
   }
 
