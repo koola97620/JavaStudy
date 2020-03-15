@@ -8,6 +8,7 @@ package chapter2;
 public class Apple {
 
   private String color;
+  private int weight;
 
   public Apple(String color) {
 
@@ -16,5 +17,9 @@ public class Apple {
 
   public String getColor() {
     return color;
+  }
+
+  public int getWeight() {
+    return weight;
   }
 }
