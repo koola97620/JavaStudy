@@ -1,5 +1,6 @@
 package chapter3;
 
+import java.util.Collections;
 import java.util.Comparator;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +22,7 @@ public class Exam1 {
 
     Comparator<Apple> appleComparator =
         Comparator.comparing(Apple::getWeight);
+
 
 
   }
