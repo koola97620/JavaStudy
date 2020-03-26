@@ -20,6 +20,10 @@ public class Exam1 {
       }
     };
 
+    Comparator<Apple> comparator2 = (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+
+
+
     Comparator<Apple> appleComparator =
         Comparator.comparing(Apple::getWeight);
 
