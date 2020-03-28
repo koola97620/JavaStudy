@@ -51,7 +51,10 @@ public class Exam1 {
 
   public void exam2() throws IOException{
     //String s = processFile( (BufferedReader br) -> br.readLine() + br.readLine() );
-    String s = processFile((BufferedReader br) -> br.readLine() + br.readLine() );
+    String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine() );
+    String oneLine = processFile((BufferedReader br) -> br.readLine());
+
+
   }
 
   public String processFile() throws IOException {
