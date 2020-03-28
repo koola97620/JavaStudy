@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream.Filter;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.function.IntFunction;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -14,6 +17,15 @@ import org.junit.jupiter.api.Test;
  * @description
  */
 public class Exam1 {
+
+  @Test
+  public void 박싱_언박싱() {
+    IntPredicate booleanIntFunction = (int i) -> i % 2 == 0;
+    Predicate<Integer> integerFilter = (Integer integer) -> integer % 2 == 0;
+    booleanIntFunction.test(1000);
+    integerFilter.test(1000);
+
+  }
 
   @Test
   public void test() {
