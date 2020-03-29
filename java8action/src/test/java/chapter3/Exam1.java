@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.DirectoryStream.Filter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -17,6 +21,20 @@ import org.junit.jupiter.api.Test;
  * @description
  */
 public class Exam1 {
+
+  @Test
+  public void 형식_추론() {
+    List<Apple> apples = new ArrayList<>();
+    apples.add(new Apple("green"));
+    List<Apple> collect = apples.stream().filter(apple -> "green".equals(apple.getColor()))
+        .collect(Collectors.toList());
+
+    int portNumber = 3456;
+    Runnable runnable = () -> System.out.println(portNumber);
+    // portNumber = 333; 사용불가. 람다에서 참고하는 지역변수는 final 로 선언되거나 실질적으로 final 처럼 되어야 한다
+
+
+  }
 
   @Test
   public void 박싱_언박싱() {
