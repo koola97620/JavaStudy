@@ -11,8 +11,11 @@ public class Apple {
   private Integer weight;
 
   public Apple(String color) {
-
     this.color = color;
+  }
+
+  public Apple(Integer i) {
+
   }
 
   public String getColor() {

@@ -5,9 +5,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.DirectoryStream.Filter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
@@ -21,6 +26,30 @@ import org.junit.jupiter.api.Test;
  * @description
  */
 public class Exam1 {
+
+  @Test
+  public void 메서드_레퍼런스() {
+    List<String> str = Arrays.asList("a","b","c","d");
+    str.sort( (String s1, String s2) -> s1.compareToIgnoreCase(s2));
+    str.sort(String::compareToIgnoreCase);
+
+    Function<Integer, Apple> c2 = Apple::new;
+    Apple a2 = c2.apply(111);
+
+    List<Integer> weights = Arrays.asList(7,3,4,10);
+    List<Apple> apples = map(weights, Apple::new);
+
+    Map<String, String> map = new HashMap<>();
+    map.merge("key","value", (v1,v2) -> v1+v2  );
+  }
+
+  public static List<Apple> map(List<Integer> list, Function<Integer,Apple> f) {
+    List<Apple> result = new ArrayList<>();
+    for(Integer e : list) {
+      result.add(f.apply(e));
+    }
+    return result;
+  }
 
   @Test
   public void 형식_추론() {
