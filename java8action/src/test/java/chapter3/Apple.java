@@ -9,6 +9,7 @@ public class Apple {
 
   private String color;
   private Integer weight;
+  private String country;
 
   public Apple(String color) {
     this.color = color;
@@ -24,5 +25,9 @@ public class Apple {
 
   public Integer getWeight() {
     return weight;
+  }
+
+  public String getCountry() {
+    return country;
   }
 }
