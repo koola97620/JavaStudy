@@ -15,12 +15,12 @@ public class exam1 {
 
   @Test
   public void test() {
-    List<Dish> menu = new ArrayList<>();
-    menu.add(new Dish(100,"meat"));
-    menu.add(new Dish(120,"chicken"));
+    List<Dish> menues = new ArrayList<>();
+    menues.add(new Dish(100,"meat"));
+    menues.add(new Dish(120,"chicken"));
 
     List<String> lowCaloricDishesName =
-      menu.stream().filter( d -> d.getCalories() > 50)
+      menues.stream().filter( d -> d.getCalories() > 50)
         .sorted(Comparator.comparing(Dish::getCalories))
         .map(dish -> dish.getName())
         .collect(Collectors.toList());

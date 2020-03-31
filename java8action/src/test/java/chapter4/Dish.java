@@ -8,8 +8,10 @@ import org.junit.jupiter.api.Test;
  * @description
  */
 public class Dish {
-  private int calories;
   private String name;
+  private boolean vegetarian;
+  private int calories;
+  private Type type;
 
   public Dish(int calories, String name) {
     this.calories = calories;
