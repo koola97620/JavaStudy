@@ -20,6 +20,11 @@ public class Dish {
     this.type = type;
   }
 
+  public Dish(int i, String meat) {
+
+
+  }
+
   public String getName() {
     return name;
   }
