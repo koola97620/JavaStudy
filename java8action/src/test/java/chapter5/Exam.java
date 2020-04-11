@@ -83,6 +83,11 @@ public class Exam {
     boolean isHealthy = menu.stream().allMatch(d -> d.getCalories() < 100);
     boolean isHealthy2 = menu.stream().noneMatch(d -> d.getCalories() > 100);
 
+    menu.stream()
+        .filter(Dish::isVegetarian)
+        .findAny()
+        .ifPresent(d -> System.out.println(d.getName()));
+
 
 
   }
