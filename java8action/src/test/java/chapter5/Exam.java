@@ -96,7 +96,9 @@ public class Exam {
         .filter(x -> x % 3 == 0)
         .findFirst();
 
+    someNums.stream().reduce(0, Integer::sum);
 
+    Optional<Integer> max = nums.stream().reduce(Integer::max);
 
 
 
