@@ -3,6 +3,7 @@ package chapter5;
 import chapter5.Dish.Type;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -87,6 +88,15 @@ public class Exam {
         .filter(Dish::isVegetarian)
         .findAny()
         .ifPresent(d -> System.out.println(d.getName()));
+
+    List<Integer> someNums = Arrays.asList(1,2,3,4,5);
+    Optional<Integer> firstSquareDivisibleByThree =
+        someNums.stream()
+        .map(x -> x * x)
+        .filter(x -> x % 3 == 0)
+        .findFirst();
+
+
 
 
 
