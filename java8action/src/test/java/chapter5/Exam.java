@@ -76,6 +76,12 @@ public class Exam {
         .flatMap(i -> nums.stream().map(j -> new int[]{i, j}))
         .collect(Collectors.toList());
 
+    if (menu.stream().anyMatch(Dish::isVegetarian)) {
+      System.out.println("the menu is vegetarian friendly");
+    }
+
+    boolean isHealthy = menu.stream().allMatch(d -> d.getCalories() < 100);
+    boolean isHealthy2 = menu.stream().noneMatch(d -> d.getCalories() > 100);
 
 
 
