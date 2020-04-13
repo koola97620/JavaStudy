@@ -1,7 +1,9 @@
 package chapter5;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +34,23 @@ public class TransactionTest {
   }
 
   @Test
-  public void test1() {
+  public void test() {
+    // 2011 년에 일어난 모든 트랜잭션을 찾아 값을 오름차순으로 정렬
+    transactions.stream()
+        .filter(t -> t.getYear() == 2011)
+        .sorted(Comparator.comparing(Transaction::getValue))
+        .collect(Collectors.toList());
+
+    // 거래자가 근무하는 모든 도시를 중복 없이 나열하시오.
+    transactions.stream()
+        .map(t -> t.getTrader().getCity())
+        .distinct()
+        .collect(Collectors.toList());
+
+    transactions.stream()
+        .map(t -> t.getTrader().getCity())
+        .collect(Collectors.toSet());
+
 
   }
 
