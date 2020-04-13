@@ -1,0 +1,33 @@
+package chapter5;
+
+/**
+ * @author choijaeyong on 2020/04/13.
+ * @project java8action
+ * @description
+ */
+public class Trader {
+
+  private final String name;
+  private final String city;
+
+  public Trader(String name, String city) {
+    this.name = name;
+    this.city = city;
+  }
+
+  @Override
+  public String toString() {
+    return "Trader{" +
+        "name='" + name + '\'' +
+        ", city='" + city + '\'' +
+        '}';
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getCity() {
+    return city;
+  }
+}
