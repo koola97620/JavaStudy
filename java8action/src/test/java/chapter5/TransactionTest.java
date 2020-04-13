@@ -59,6 +59,31 @@ public class TransactionTest {
         .sorted(Comparator.comparing(Trader::getName))
         .collect(Collectors.toList());
 
+    // 모든 거래자의 이름을 알파벳 순으로 정렬해서 반환하시오
+    transactions.stream()
+        .map(t -> t.getTrader())
+        .distinct()
+        .sorted(Comparator.comparing(Trader::getName))
+        .collect(Collectors.toList());
+
+    // 밀라노에 거래자가 있는가?
+    transactions.stream()
+        .anyMatch(t -> t.getTrader().getCity().equals("Milan"));
+
+    // 케임브리지에 거주하는 거래자의 모든 트랜잭션값을 출력하시오
+    transactions.stream()
+        .filter(t -> t.getTrader().getCity().equals("Cambridge"))
+        .map(t -> t.getValue())
+        .forEach(System.out::println);
+
+    // 전체 트랜잭션 중 최댓값은 얼마인가?
+    transactions.stream()
+        .map(t -> t.getValue())
+        .reduce(Integer::max);
+
+    transactions.stream()
+        .max(Comparator.comparing(t -> t.getValue()));
+
 
   }
 
