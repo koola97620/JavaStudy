@@ -19,7 +19,7 @@ public class TransactionTest {
   @BeforeEach
   public void setUp() {
     Trader raoul = new Trader("Raoul", "Cambridge");
-    Trader mario = new Trader("Mario", "Cambridge");
+    Trader mario = new Trader("Mario", "Milan");
     Trader alan = new Trader("Alan", "Cambridge");
     Trader brian = new Trader("Brian", "Cambridge");
 
@@ -50,6 +50,14 @@ public class TransactionTest {
     transactions.stream()
         .map(t -> t.getTrader().getCity())
         .collect(Collectors.toSet());
+
+    // 케임브리지에 근무하는 모든 거래자를 찾아서 이름순으로 정렬하시오
+    transactions.stream()
+        .map(t -> t.getTrader())
+        .filter(t -> t.getCity().equals("Cambridge"))
+        .distinct()
+        .sorted(Comparator.comparing(Trader::getName))
+        .collect(Collectors.toList());
 
 
   }
