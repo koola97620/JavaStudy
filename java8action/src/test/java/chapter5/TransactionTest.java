@@ -83,7 +83,10 @@ public class TransactionTest {
 
     transactions.stream()
         .max(Comparator.comparing(t -> t.getValue()));
+  }
 
+  @Test
+  public void exam() {
 
   }
 

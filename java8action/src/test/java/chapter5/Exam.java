@@ -4,7 +4,9 @@ import chapter5.Dish.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -99,6 +101,44 @@ public class Exam {
     someNums.stream().reduce(0, Integer::sum);
 
     Optional<Integer> max = nums.stream().reduce(Integer::max);
+  }
+
+  @Test
+  public void page171() {
+    menu.stream()
+        .map(Dish::getCalories)
+        .reduce(0,Integer::sum);
+
+    menu.stream()
+        .mapToInt(d -> d.getCalories())
+        .sum();
+
+    IntStream intStream = menu.stream().mapToInt(Dish::getCalories);
+    Stream<Integer> boxed = intStream.boxed();
+
+    OptionalInt max = menu.stream()
+        .mapToInt(d -> d.getCalories())
+        .max();
+    int i = max.orElse(1);
+
+  }
+
+  @Test
+  public void page175() {
+
+//    IntStream.rangeClosed(1,100).boxed()
+//        .flatMap(a ->
+//            IntStream.rangeClosed(a,100)
+//                .filter(b -> Math.sqrt(a*a + b*b) % 1 ==0)
+//                .mapToObj(b -> new int[]{a, b (int) Math.sqrt(a*a + b*b) } )
+//
+//            );
+
+
+    Stream<String> stream = Stream.of("Java8 ", "Lamdas " , "In ", "Action");
+    stream.map(String::toUpperCase).forEach(System.out::println);
+
+
 
 
 
