@@ -55,6 +55,11 @@ public class Exam {
     IntSummaryStatistics collect1 = menu.stream()
         .collect(Collectors.summarizingInt(Dish::getCalories));
 
+
+    menu.stream().map(Dish::getName).collect(Collectors.joining());
+    menu.stream().map(Dish::getName).collect(Collectors.joining(","));
+
+
   }
 
 }
