@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
@@ -81,6 +82,25 @@ public class Exam {
           }
         })
     );
+
+    menu.stream().collect(
+        Collectors.groupingBy(Dish::getType ,
+            Collectors.groupingBy( dish -> {
+              if (dish.getCalories() <= 400) {
+                return CaloricLevel.DIET;
+              } else if (dish.getCalories() <= 700) {
+                return CaloricLevel.NORMAL;
+              } else  {
+                return CaloricLevel.FAT;
+              }
+            }
+
+            ))
+    );
+
+    Map<Type, Long> collect = menu.stream()
+        .collect(Collectors.groupingBy(Dish::getType, Collectors.counting()));
+
 
 
   }
