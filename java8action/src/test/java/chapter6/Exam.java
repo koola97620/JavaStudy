@@ -59,6 +59,14 @@ public class Exam {
     menu.stream().map(Dish::getName).collect(Collectors.joining());
     menu.stream().map(Dish::getName).collect(Collectors.joining(","));
 
+    menu.stream().collect(Collectors.reducing(0, d -> d.getCalories() , (i,j) -> i+j));
+
+    menu.stream().collect(Collectors.reducing( (d1,d2) -> d1.getCalories() > d2.getCalories() ? d1 : d2));
+
+    menu.stream().collect(Collectors.reducing(0,Dish::getCalories,Integer::sum));
+
+
+
 
   }
 
