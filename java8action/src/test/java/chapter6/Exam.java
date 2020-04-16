@@ -64,10 +64,11 @@ public class Exam {
     menu.stream().collect(Collectors.reducing( (d1,d2) -> d1.getCalories() > d2.getCalories() ? d1 : d2));
 
     menu.stream().collect(Collectors.reducing(0,Dish::getCalories,Integer::sum));
+  }
 
-
-
-
+  @Test
+  public void grouping() {
+    menu.stream().collect(Collectors.groupingBy(d -> d.getType()));
   }
 
 }
