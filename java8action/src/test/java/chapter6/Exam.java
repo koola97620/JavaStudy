@@ -7,11 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -100,6 +102,45 @@ public class Exam {
 
     Map<Type, Long> collect = menu.stream()
         .collect(Collectors.groupingBy(Dish::getType, Collectors.counting()));
+
+    Map<Type, Optional<Dish>> collect1 = menu.stream().collect(Collectors
+        .groupingBy(Dish::getType, Collectors.maxBy(Comparator.comparing(Dish::getCalories))));
+
+    Map<Type, Dish> collect2 = menu.stream().collect(
+        Collectors.groupingBy(Dish::getType,
+            Collectors.collectingAndThen(
+                Collectors.maxBy(Comparator.comparingInt(d -> d.getCalories() )), Optional::get
+            ))
+    );
+
+    menu.stream().collect(Collectors.groupingBy(Dish::getType ,
+        Collectors.summingInt(Dish::getCalories)));
+
+    Map<Type, Set<CaloricLevel>> collect3 = menu.stream().collect(
+        Collectors.groupingBy(Dish::getType,
+            Collectors.mapping(dish -> {
+              if (dish.getCalories() <= 400) {
+                return CaloricLevel.DIET;
+              } else if (dish.getCalories() <= 700) {
+                return CaloricLevel.NORMAL;
+              } else {
+                return CaloricLevel.FAT;
+              }
+            }, Collectors.toSet()))
+    );
+
+    menu.stream().collect(
+        Collectors.groupingBy(Dish::getType ,
+            Collectors.mapping(dish -> {
+              if (dish.getCalories() <= 400) {
+                return CaloricLevel.DIET;
+              } else if (dish.getCalories() <= 700) {
+                return CaloricLevel.NORMAL;
+              } else {
+                return CaloricLevel.FAT;
+              }
+            } , Collectors.toCollection(HashSet::new)))
+    );
 
 
 
