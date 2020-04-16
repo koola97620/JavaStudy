@@ -69,6 +69,20 @@ public class Exam {
   @Test
   public void grouping() {
     menu.stream().collect(Collectors.groupingBy(d -> d.getType()));
+
+    menu.stream().collect(
+        Collectors.groupingBy(dish -> {
+          if (dish.getCalories() <= 400) {
+            return CaloricLevel.DIET;
+          } else if (dish.getCalories() <= 700) {
+            return CaloricLevel.NORMAL;
+          } else  {
+            return CaloricLevel.FAT;
+          }
+        })
+    );
+
+
   }
 
 }
