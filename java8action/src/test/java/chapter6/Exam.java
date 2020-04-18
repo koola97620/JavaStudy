@@ -129,8 +129,8 @@ public class Exam {
             }, Collectors.toSet()))
     );
 
-    menu.stream().collect(
-        Collectors.groupingBy(Dish::getType ,
+    Map<Type, HashSet<CaloricLevel>> collect4 = menu.stream().collect(
+        Collectors.groupingBy(Dish::getType,
             Collectors.mapping(dish -> {
               if (dish.getCalories() <= 400) {
                 return CaloricLevel.DIET;
@@ -139,8 +139,27 @@ public class Exam {
               } else {
                 return CaloricLevel.FAT;
               }
-            } , Collectors.toCollection(HashSet::new)))
+            }, Collectors.toCollection(HashSet::new)))
     );
+
+    // page 205 분할
+    Map<Boolean, List<Dish>> collect5 = menu.stream()
+        .collect(Collectors.partitioningBy(Dish::isVegetarian));
+    List<Dish> dishes = collect5.get(true);
+
+    List<Dish> collect6 = menu.stream().filter(Dish::isVegetarian).collect(Collectors.toList());
+
+    menu.stream().collect(
+        Collectors.partitioningBy(Dish::isVegetarian, Collectors.groupingBy(Dish::getType))
+    );
+
+    Map<Boolean, Dish> collect7 = menu.stream().collect(
+        Collectors.partitioningBy(Dish::isVegetarian,
+            Collectors.collectingAndThen(
+                Collectors.maxBy(Comparator.comparingInt(Dish::getCalories)), Optional::get
+            ))
+    );
+
 
 
 
