@@ -161,8 +161,20 @@ public class Exam {
     );
 
 
+  }
 
+  private boolean isPrime(int candidate) {
+    int candidateRoot = (int) Math.sqrt( (double) candidate);
+    return IntStream.rangeClosed(2,candidateRoot)
+        .noneMatch(i -> candidate % i == 0);
 
+//    return IntStream.range(2,candidate)
+//        .noneMatch(i -> candidate % i == 0);
+  }
+
+  public Map<Boolean, List<Integer>> partitionPrimes(int n) {
+    return IntStream.rangeClosed(2,n).boxed()
+        .collect(Collectors.partitioningBy(candidate -> isPrime(candidate)));
   }
 
 }
