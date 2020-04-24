@@ -177,4 +177,9 @@ public class Exam {
         .collect(Collectors.partitioningBy(candidate -> isPrime(candidate)));
   }
 
+  public Map<Boolean, List<Integer>> partitionPrimesWithCollector(int n ) {
+    return IntStream.rangeClosed(2,n).boxed()
+        .collect(new PrimeNumbersCollector());
+  }
+
 }
