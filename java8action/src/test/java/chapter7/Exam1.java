@@ -13,6 +13,7 @@ public class Exam1 {
 
   @Test
   public void page228() {
+    System.out.println("sequentialSum : " + measureSumPerf(Exam1::sequentialSum, 10_000_000) + " msecs");
 
   }
 
