@@ -20,6 +20,18 @@ public class SpliteratorExam {
     Stream<Character> characterStream = IntStream.range(0, SENTENCE.length())
         .mapToObj(SENTENCE::charAt);
 
+    System.out.println("Found " + countWords(characterStream) + " words");
+
+    characterStream = IntStream.range(0, SENTENCE.length())
+        .mapToObj(SENTENCE::charAt);
+    System.out.println("Found " + countWords(characterStream.parallel()) + " words");
+
+  }
+
+  private int countWords(Stream<Character> stream) {
+    WordCounter reduce = stream
+        .reduce(new WordCounter(0, true), WordCounter::accumulate, WordCounter::combine);
+    return reduce.getCounter();
   }
 
 }
