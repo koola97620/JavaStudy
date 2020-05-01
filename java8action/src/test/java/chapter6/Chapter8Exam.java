@@ -52,6 +52,10 @@ public class Chapter8Exam {
 
     menu.stream().map(Dish::getCalories).reduce(0 , (c1,c2) -> c1+c2);
     menu.stream().mapToInt(Dish::getCalories).sum();
+
+    menu.stream().filter(d -> d.getCalories() >= 400)
+        .map(Dish::getName)
+        .collect(Collectors.toList());
   }
 
 }
