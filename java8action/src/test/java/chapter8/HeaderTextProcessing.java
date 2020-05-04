@@ -9,6 +9,6 @@ public class HeaderTextProcessing extends ProcessingObject<String> {
 
   @Override
   protected String handleWork(String input) {
-    return null;
+    return "From Raoul, Mario and Alan : " + input;
   }
 }
