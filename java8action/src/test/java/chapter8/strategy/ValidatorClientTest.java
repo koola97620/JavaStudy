@@ -1,4 +1,4 @@
-package chapter8;
+package chapter8.strategy;
 
 import org.junit.jupiter.api.Test;
 

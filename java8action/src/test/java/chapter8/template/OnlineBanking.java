@@ -1,5 +1,7 @@
-package chapter8;
+package chapter8.template;
 
+import chapter8.Customer;
+import chapter8.Database;
 import java.util.function.Consumer;
 
 /**

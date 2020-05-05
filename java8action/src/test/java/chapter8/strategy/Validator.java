@@ -1,4 +1,6 @@
-package chapter8;
+package chapter8.strategy;
+
+import chapter8.strategy.ValidationStrategy;
 
 /**
  * @author choijaeyong on 2020/05/02.

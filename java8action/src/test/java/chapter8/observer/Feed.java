@@ -1,4 +1,4 @@
-package chapter8;
+package chapter8.observer;
 
 import java.util.ArrayList;
 import java.util.List;

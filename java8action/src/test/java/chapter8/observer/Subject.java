@@ -1,4 +1,4 @@
-package chapter8;
+package chapter8.observer;
 
 /**
  * @author choijaeyong on 2020/05/03.

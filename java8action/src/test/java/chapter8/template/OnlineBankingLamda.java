@@ -1,4 +1,6 @@
-package chapter8;
+package chapter8.template;
+
+import chapter8.Customer;
 
 /**
  * @author choijaeyong on 2020/05/03.

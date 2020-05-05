@@ -1,4 +1,4 @@
-package chapter8;
+package chapter8.observer;
 
 import org.junit.jupiter.api.Test;
 

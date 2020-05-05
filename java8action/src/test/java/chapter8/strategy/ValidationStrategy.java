@@ -1,4 +1,4 @@
-package chapter8;
+package chapter8.strategy;
 
 /**
  * @author choijaeyong on 2020/05/01.

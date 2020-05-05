@@ -1,5 +1,6 @@
-package chapter8;
+package chapter8.template;
 
+import chapter8.Customer;
 import org.junit.jupiter.api.Test;
 
 /**
