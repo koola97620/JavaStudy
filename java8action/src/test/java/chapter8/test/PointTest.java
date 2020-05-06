@@ -20,4 +20,12 @@ public class PointTest {
     assertThat(p2.getY()).isEqualTo(5);
   }
 
+  @Test
+  public void test2() {
+    Point p1 = new Point(10,15);
+    Point p2 = new Point(10, 20);
+    int result = Point.compareByXAndThenY.compare(p1, p2);
+    assertThat(result).isEqualTo(-1);
+  }
+
 }
