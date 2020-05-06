@@ -6,5 +6,6 @@ package chapter8.factory;
  * @description
  */
 public class Loan extends Product {
+  public Loan() {}
 
 }
