@@ -1,6 +1,8 @@
 package chapter8.test;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author choijaeyong on 2020/05/06.
@@ -31,4 +33,12 @@ public class Point {
 
   public final static Comparator<Point> compareByXAndThenY =
       Comparator.comparing(Point::getX).thenComparing(Point::getY);
+
+
+  public static List<Point> moveAllPointsRightBy(List<Point> points, int x) {
+    return points.stream()
+        .map(p -> new Point(p.getX() + x , p.getY()))
+        .collect(Collectors.toList());
+  }
+
 }

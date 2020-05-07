@@ -2,6 +2,8 @@ package chapter8.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -27,5 +29,16 @@ public class PointTest {
     int result = Point.compareByXAndThenY.compare(p1, p2);
     assertThat(result).isEqualTo(-1);
   }
+
+  @Test
+  public void testMoveAllPointsRightBy() throws Exception {
+    List<Point> points = Arrays.asList(new Point(5,5) , new Point(10,5));
+    List<Point> expectedPoints = Arrays.asList(new Point(15, 5), new Point(20, 5));
+    List<Point> newPoints = Point.moveAllPointsRightBy(points, 10);
+    assertThat(newPoints).isEqualTo(expectedPoints);
+  }
+
+
+
 
 }
