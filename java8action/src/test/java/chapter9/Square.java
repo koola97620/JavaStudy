@@ -37,8 +37,8 @@ public class Square implements Resizable{
 
   }
 
-  @Override
-  public void setRelativeSize(int wFactor, int hFactor) {
-
-  }
+//  @Override
+//  public void setRelativeSize(int wFactor, int hFactor) {
+//
+//  }
 }
