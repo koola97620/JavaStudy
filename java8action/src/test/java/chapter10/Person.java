@@ -7,6 +7,6 @@ package chapter10;
  */
 public class Person {
   private Car car;
-  private Car getCar() {return car;}
+  public Car getCar() {return car;}
 
 }
