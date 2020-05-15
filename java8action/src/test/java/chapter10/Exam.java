@@ -27,4 +27,20 @@ public class Exam {
     return "Unknown";
   }
 
+  public String getCarInsuranceName(Person person) {
+    if (person == null) {
+      return "Unknown";
+    }
+
+    Car car = person.getCar();
+    if (car == null) {
+      return "Unknown";
+    }
+    Insurance insurance = car.getInsurance();
+    if (insurance == null) {
+      return "Unknown";
+    }
+    return insurance.getName();
+  }
+
 }
