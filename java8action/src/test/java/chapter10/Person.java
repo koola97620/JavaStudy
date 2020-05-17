@@ -16,4 +16,9 @@ public class Person {
   public Optional<Car> getCar() {
     return car;
   }
+
+  private int age;
+  public int getAge() {
+    return age;
+  }
 }

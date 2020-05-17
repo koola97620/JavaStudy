@@ -15,16 +15,17 @@ public class Exam {
     Person person = new Person();
     Optional<Car> car = person.getCar();
 
+    Insurance insurance2 = car.get().getInsurance().get();
+    Optional<Insurance> optInsurance = Optional.ofNullable(insurance2);
+    Optional<String> s = optInsurance.map(Insurance::getName);
+
+
     Optional<Insurance> insurance = car.get().getInsurance();
 
     String name = null;
     if (insurance.isPresent()) {
       name = insurance.get().getName();
     }
-
-    Insurance insurance2 = car.get().getInsurance().get();
-    Optional<Insurance> optInsurance = Optional.ofNullable(insurance2);
-    Optional<String> s = optInsurance.map(Insurance::getName);
   }
 
   @Test
