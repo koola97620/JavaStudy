@@ -38,6 +38,14 @@ public class Exam {
 
   @Test
   public void test3() {
+    Person person = new Person();
+    Optional<Person> person1 = Optional.ofNullable(person);
+    String unknown = person1.flatMap(Person::getCar)
+        .flatMap(Car::getInsurance)
+        .map(Insurance::getName)
+        .orElse("Unknown");
+
+
 
   }
 
