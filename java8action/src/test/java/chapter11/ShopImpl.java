@@ -1,6 +1,8 @@
 package chapter11;
 
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 /**
  * @author choijaeyong on 2020/05/19.
@@ -9,10 +11,27 @@ import java.util.Random;
  */
 public class ShopImpl implements Shop {
 
+  private String product;
+
+  public ShopImpl(String product) {
+
+    this.product = product;
+  }
+
   @Override
   public double getPrice(String product) {
     return calculatePrice(product);
   }
+
+  public Future<Double> getPriceAsync(String product) {
+    CompletableFuture<Double> futurePrice = new CompletableFuture<>();
+    new Thread( () -> {
+      double price = calculatePrice(product);
+      futurePrice.complete(price);
+    }).start();
+    return futurePrice;
+  }
+
 
   private double calculatePrice(String product) {
     delay();
