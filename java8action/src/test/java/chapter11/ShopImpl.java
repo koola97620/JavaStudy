@@ -3,6 +3,7 @@ package chapter11;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
+import org.assertj.core.api.CompletableFutureAssert;
 
 /**
  * @author choijaeyong on 2020/05/19.
@@ -14,7 +15,6 @@ public class ShopImpl implements Shop {
   private String product;
 
   public ShopImpl(String product) {
-
     this.product = product;
   }
 
@@ -42,6 +42,9 @@ public class ShopImpl implements Shop {
         futurePrice.completeExceptionally(ex);
       }
     }).start();
+
+    // CompletableFuture.supplyAsync( () -> calculatePrice(product));
+
     return futurePrice;
   }
 
@@ -60,4 +63,6 @@ public class ShopImpl implements Shop {
       throw new RuntimeException(e);
     }
   }
+
+
 }

@@ -1,5 +1,7 @@
 package chapter11;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Future;
 import org.junit.jupiter.api.Test;
 
@@ -35,5 +37,17 @@ public class ShopTest {
   private void doSomething() {
 
   }
+
+  @Test
+  public void non_block() {
+    List<ShopImpl> shops = Arrays.asList(new ShopImpl("BestPrice"),
+        new ShopImpl("LetsSaveBig"),
+        new ShopImpl("MyFavoriteShop"),
+        new ShopImpl("BuyItAll"));
+
+
+  }
+
+
 
 }
