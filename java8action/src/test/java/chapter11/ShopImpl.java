@@ -24,10 +24,23 @@ public class ShopImpl implements Shop {
   }
 
   public Future<Double> getPriceAsync(String product) {
+    // 11.2.1
+//    CompletableFuture<Double> futurePrice = new CompletableFuture<>();
+//    new Thread( () -> {
+//      double price = calculatePrice(product);
+//      futurePrice.complete(price);
+//    }).start();
+//    return futurePrice;
+
+    // 11.2.2
     CompletableFuture<Double> futurePrice = new CompletableFuture<>();
     new Thread( () -> {
-      double price = calculatePrice(product);
-      futurePrice.complete(price);
+      try {
+        double price = calculatePrice(product);
+        futurePrice.complete(price);
+      } catch (Exception ex) {
+        futurePrice.completeExceptionally(ex);
+      }
     }).start();
     return futurePrice;
   }
