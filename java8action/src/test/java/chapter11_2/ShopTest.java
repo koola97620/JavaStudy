@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import chapter11.ShopImpl;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -14,12 +16,36 @@ import org.junit.jupiter.api.Test;
  */
 class ShopTest {
 
+  private List<Shop> shops;
+
+  @BeforeEach
+  void setUp() {
+    shops = Arrays.asList(new Shop("BestPrice"),
+        new Shop("LetsSaveBig"),
+        new Shop("MyFavoriteShop"),
+        new Shop("BuyItAll"));
+  }
+
   @Test
   public void test() {
-    List<ShopImpl> shops = Arrays.asList(new ShopImpl("BestPrice"),
-        new ShopImpl("LetsSaveBig"),
-        new ShopImpl("MyFavoriteShop"),
-        new ShopImpl("BuyItAll"));
+    Product product = new Product("myPhone27S" , 10000);
+    shops.get(0).addProduct(product);
+    findPrices(product.getName());
+
+  }
+
+  public List<String> findPrices(String product) {
+    return shops.stream()
+        .map(shop -> String
+            .format("%s price is %.2f", shop.getName(), shop.getPrice(product)))
+        .collect(Collectors.toList());
+  }
+
+  public List<String> findPricesParallel(String product) {
+    return shops.stream()
+        .map(shop -> String
+            .format("%s price is %.2f", shop.getName(), shop.getPrice(product)))
+        .collect(Collectors.toList());
   }
 
 }

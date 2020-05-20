@@ -1,5 +1,8 @@
 package chapter11_2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author choijaeyong on 2020/05/20.
  * @project java8action
@@ -8,7 +11,8 @@ package chapter11_2;
 public class Shop {
 
   private String name;
-  private int price;
+  private List<Product> products = new ArrayList<>();
+
 
   public Shop(String name) {
     this.name = name;
@@ -18,15 +22,24 @@ public class Shop {
     return name;
   }
 
-  public int getPrice() {
-    return price;
+  public int getPrice(String productName) {
+    int result = 0;
+    for (Product product : products) {
+      if (productName.equals(product.getName())) {
+        result = product.getPrice();
+      }
+    }
+    return result;
   }
 
   public void setName(String name) {
     this.name = name;
   }
 
-  public void setPrice(int price) {
-    this.price = price;
+  public void addProduct(Product product) {
+    products.add(product);
   }
+
+
+
 }
