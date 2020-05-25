@@ -1,6 +1,8 @@
 package chapter11_3;
 
 import chapter11_3.Discount.Code;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -10,8 +12,12 @@ import java.util.Random;
  */
 public class Shop {
   private String name;
-
+  private List<Product> products = new ArrayList<>();
   private Random random = new Random();
+
+  public Shop(String name) {
+    this.name = name;
+  }
 
   public String getPrice(String product) {
     double price = calculatePrice(product);
@@ -30,6 +36,17 @@ public class Shop {
     }catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public void addProduct(Product product) {
+    products.add(product);
+  }
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
 }

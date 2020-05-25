@@ -18,10 +18,6 @@ public class Shop {
     this.name = name;
   }
 
-  public String getName() {
-    return name;
-  }
-
   public int getPrice(String productName) {
     int result = 0;
     for (Product product : products) {
@@ -30,6 +26,10 @@ public class Shop {
       }
     }
     return result;
+  }
+
+  public String getName() {
+    return name;
   }
 
   public void setName(String name) {
