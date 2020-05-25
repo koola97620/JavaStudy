@@ -37,9 +37,8 @@ class ShopTest {
 
   public List<String> findPrices(String product) {
     return shops.stream()
-        .map(shop -> shop.getPrice(product))
-        .map(price -> Quote.parse(price))
-        .map(quote -> Discount.applyDiscount(quote))
+        .map(shop -> String
+            .format("%s price is %.2f", shop.getName(), shop.getPrice(product)))
         .collect(Collectors.toList());
   }
 

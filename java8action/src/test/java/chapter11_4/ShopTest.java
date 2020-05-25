@@ -1,8 +1,5 @@
-package chapter11_2;
+package chapter11_4;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import chapter11.ShopImpl;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -40,8 +37,9 @@ class ShopTest {
 
   public List<String> findPrices(String product) {
     return shops.stream()
-        .map(shop -> String
-            .format("%s price is %.2f", shop.getName(), shop.getPrice(product)))
+        .map(shop -> shop.getPrice(product))
+        .map(price -> Quote.parse(price))
+        .map(quote -> Discount.applyDiscount(quote))
         .collect(Collectors.toList());
   }
 
