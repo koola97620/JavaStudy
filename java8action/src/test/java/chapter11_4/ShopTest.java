@@ -35,11 +35,27 @@ class ShopTest {
 
   }
 
+
+  // 11.4.2
   public List<String> findPrices(String product) {
     return shops.stream()
         .map(shop -> shop.getPrice(product))
         .map(price -> Quote.parse(price))
         .map(quote -> Discount.applyDiscount(quote))
+        .collect(Collectors.toList());
+  }
+
+  // 11.4.3
+  public List<String> findPrices2(String product) {
+    List<CompletableFuture<String>> priceFutures = shops.stream()
+        .map(shop -> CompletableFuture.supplyAsync(() -> shop.getPrice(product), executor))
+        .map(future -> future.thenApply(Quote::parse))
+        .map(future -> future.thenCompose(
+            quote -> CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)))
+        .collect(Collectors.toList());
+
+    return priceFutures.stream()
+        .map(CompletableFuture::join)
         .collect(Collectors.toList());
   }
 
