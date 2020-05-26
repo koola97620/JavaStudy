@@ -8,6 +8,7 @@ import static com.sun.tools.javac.util.Constants.format;
  * @description
  */
 public class Discount {
+
   public enum Code {
     NONE(0), SILVER(5), GOLD(10), PLATINUM(15), DIAMOND(20);
 

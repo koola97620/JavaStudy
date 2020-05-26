@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ThreadFactory;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,6 +59,12 @@ class ShopTest {
     return priceFutures.stream()
         .map(CompletableFuture::join)
         .collect(Collectors.toList());
+  }
+
+  // 11.4.4
+  public Future<Double> mergeCompletableFuture(Shop shop, String product) {
+    // thenCombine
+    return null;
   }
 
   public List<String> findPricesParallel(String product) {
