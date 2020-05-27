@@ -21,6 +21,15 @@ import org.junit.jupiter.api.Test;
 class ShopTest2 {
 
   private List<Shop> shops;
+  private final Executor executor =
+      Executors.newFixedThreadPool(Math.min(shops.size(), 100), new ThreadFactory() {
+        @Override
+        public Thread newThread(Runnable r) {
+          Thread t = new Thread(r);
+          t.setDaemon(true);
+          return t;
+        }
+      });
 
   @BeforeEach
   void setUp() {
@@ -51,13 +60,25 @@ class ShopTest2 {
             )));
   }
 
-  private final Executor executor =
-      Executors.newFixedThreadPool(Math.min(shops.size(), 100), new ThreadFactory() {
-        @Override
-        public Thread newThread(Runnable r) {
-          Thread t = new Thread(r);
-          t.setDaemon(true);
-          return t;
-        }
-      });
+  public void endCompletableFuture() {
+    CompletableFuture[] myPhones = findPricesStream("myPhone")
+        .map(f -> f.thenAccept(System.out::println))
+        .toArray(size -> new CompletableFuture[size]);
+    CompletableFuture.allOf(myPhones).join();
+  }
+
+  public void result() {
+    long start = System.nanoTime();
+    CompletableFuture[] myPhones = findPricesStream("myPhone")
+        .map(f -> f.thenAccept(s -> System.out
+            .println(s + " (done in " + ((System.nanoTime() - start) / 10_000_000) + " msecs")))
+        .toArray(size -> new CompletableFuture[size]);
+
+    CompletableFuture.allOf(myPhones).join();
+
+    System.out.println("All shops have now responded in " +
+        ((System.nanoTime() - start) / 1_000_000) + " msecs");
+  }
+
+
 }
