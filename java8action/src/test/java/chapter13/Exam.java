@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.LongStream;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -55,15 +56,38 @@ public class Exam {
 
   }
 
-  private static List<List<Integer>> concat(List<List<Integer>> subans,
-      List<List<Integer>> subans2) {
-    return null;
+  private static List<List<Integer>> concat(List<List<Integer>> a,
+      List<List<Integer>> b) {
+    List<List<Integer>> r = new ArrayList<>(a);
+    r.addAll(b);
+    return r;
   }
 
-  private static List<List<Integer>> insertAll(Integer first, List<List<Integer>> subans) {
+  private static List<List<Integer>> insertAll(Integer first, List<List<Integer>> lists) {
 
-    return null;
+    List<List<Integer>> result = new ArrayList<>();
+    for (List<Integer> list : lists) {
+      List<Integer> copyList = new ArrayList<>();
+      copyList.add(first);
+      copyList.addAll(list);
+      result.add(copyList);
+    }
+    return result;
   }
 
+  // 13.3
+  static long factorialStreams(long n) {
+    return LongStream.rangeClosed(1,n)
+        .reduce(1, (long a, long b) -> a*b);
+  }
+
+  // 13.3
+  static long factorialTailRecursive(long n) {
+    return factorialHelper(1,n);
+  }
+
+  private static long factorialHelper(long acc, long n) {
+    return n == 1 ? acc : factorialHelper(acc * n , n-1);
+  }
 
 }
