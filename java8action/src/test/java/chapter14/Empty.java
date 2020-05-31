@@ -1,5 +1,7 @@
 package chapter14;
 
+import java.util.function.Predicate;
+
 /**
  * @author choijaeyong on 2020/05/31.
  * @project java8action
@@ -20,5 +22,10 @@ public class Empty<T> implements MyList<T> {
   @Override
   public boolean isEmpty() {
     return false;
+  }
+
+  @Override
+  public MyList<T> filter(Predicate<T> p) {
+    throw new UnsupportedOperationException();
   }
 }

@@ -30,8 +30,8 @@ class ShopTest {
   @Test
   public void test() {
     Product product = new Product("myPhone27S" , 10000);
-    shops.get(0).addProduct(product);
-    findPrices(product.getName());
+//    shops.get(0).addProduct(product);
+//    findPrices(product.getName());
 
   }
 

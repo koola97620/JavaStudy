@@ -1,19 +1,19 @@
 package chapter14;
 
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * @author choijaeyong on 2020/05/31.
  * @project java8action
  * @description
  */
-public class MyLinkedList<T> implements MyList<T> {
+public class LazyList<T> implements MyList<T> {
 
   private final T head;
-  private final MyList<T> tail;
+  private final Supplier<MyList<T>> tail;
 
-  public MyLinkedList(T head, MyList<T> tail) {
-
+  public LazyList(T head, Supplier<MyList<T>> tail) {
     this.head = head;
     this.tail = tail;
   }
@@ -25,7 +25,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
   @Override
   public MyList<T> tail() {
-    return tail;
+    return tail.get();
   }
 
   @Override
@@ -35,6 +35,8 @@ public class MyLinkedList<T> implements MyList<T> {
 
   @Override
   public MyList<T> filter(Predicate<T> p) {
-    return null;
+    return isEmpty() ? this :
+        p.test(head()) ?
+            new LazyList<>(head(), () -> tail().filter(p) ) : tail().filter(p);
   }
 }
